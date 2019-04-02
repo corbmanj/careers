@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import * as style from './Components.less';
 import Avatar from './Avatar'
@@ -7,6 +7,7 @@ import MenuBar from './MenuBar'
 import FilesList from './FilesList'
 
 export default function MemberInfo (props) {
+	const [selectedItem, updateSelectedItem] = useState('files');
 	return (
 		<div className={style.MemberList}>
 			<Avatar
@@ -15,8 +16,14 @@ export default function MemberInfo (props) {
 				title={props.selectedMember.title}
 
 			/>
-			<MenuBar />
-			<FilesList files={props.files} />
+			<MenuBar
+				selectedItem={selectedItem}
+				updateSelectedItem={updateSelectedItem}
+			/>
+			<FilesList
+				files={props.files}
+				selectedItem={selectedItem}
+			/>
 		</div>
 	);
 }
