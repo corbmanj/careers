@@ -3,7 +3,7 @@ import React from 'react';
 
 import * as style from './Components.less';
 
-export default function Member (props) {
+export default function MenuBar () {
 
 	return (
 		<div className={style.MenuBar}>
