@@ -1,0 +1,87 @@
+@import "../../less/base.less";
+
+.Avatar {
+	display: flex;
+	align-items: center;
+	
+	img {
+		border-radius: 50%;
+	}
+	
+}
+
+.Breadcrumb {
+	font-size: @h3;
+	font-weight: @mediumBold;
+	color: @grey;
+	margin: 0 0 30px;
+
+	i {
+		font-size: 1.8rem;
+		margin: 0 10px;
+	}
+}
+
+.FileList {
+	position: relative;
+	top: 40px;
+	margin: 0 20px;
+	line-height: 20px;
+
+	ul {
+		list-style-type: none;
+	}
+}
+
+.Member {
+	padding: 10px;
+	border-bottom: .5px solid @grey;
+}
+
+.MenuBar {
+	position: relative;
+    top: 20px;
+    background: @grey;
+    height: 40px;
+	line-height: 40px;
+	font-variant: small-caps;
+	font-weight: @mediumBold;
+	
+	span {
+		margin: 0 30px;
+	}
+
+	.selected {
+		text-decoration: underline;
+	}
+}
+
+.TeamsList {
+	position: absolute;
+    // background: white;
+    padding: 10px;
+	top: 90px;
+	
+	ul {
+		background: @background;
+		list-style-type: none;
+	}
+
+	li {
+		padding: 5px;
+		border: 1px solid @greyDark;
+		border-bottom: none;
+	}
+
+	li:last-child {
+		border-bottom: 1px solid @greyDark;
+	}
+}
+
+.name {
+	font-weight: @bold;
+}
+
+.subtext {
+	color: @subtext;
+}

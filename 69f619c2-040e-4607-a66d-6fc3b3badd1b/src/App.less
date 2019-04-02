@@ -65,16 +65,23 @@
 	.Content {
 		padding: 30px;
 
-		.Breadcrumb {
-			font-size: @h1;
-			font-weight: 300;
-			margin: 0 0 30px;
-		}
-
-		.Box {
+		.Panel {
+			display: flex;
 			background: #FFF;
 			box-shadow: @shadow;
 			padding: 20px;
+			
+			div {
+				border: 1px solid black;
+			}
+
+			.memberList {
+				flex: 1;
+			}
+
+			.memberInfo {
+				flex: 3;
+			}
 		}
 	}
 }

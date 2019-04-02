@@ -1,7 +1,33 @@
+
 import React, { Component } from 'react';
+
 import * as style from './App.less';
+import Teams from './Containers/Teams'
 
 class App extends Component {
+	constructor(props) {
+		super(props)
+		this.state = { 
+			activeTab: 'Teams'
+		}
+	}
+
+	updateSelectedTeam = (team) => {
+		this.setState({ selectedTeam: team })
+	}
+
+	updateSelectedMember = (member) => {
+		this.setState({ selectedMember: member })
+	}
+
+	renderContent = () => {
+		switch (this.state.activeTab) {
+			case 'Teams':
+			default:
+				return <Teams />
+		}
+	}
+
 	render() {
 		return (
 			<div className={style.App}>
@@ -25,19 +51,13 @@ class App extends Component {
 					</ul>
 					
 					<div className={style.MenuUser}>
-						<i class={`far fa-user-circle ${style.Avatar}`} />
-						<i class="fas fa-ellipsis-v" />
+						<i className={`far fa-user-circle ${style.Avatar}`} />
+						<i className="fas fa-ellipsis-v" />
 					</div>
 				</div>
 
 				<div className={style.Content}>
-					<div className={style.Breadcrumb}>
-						Teams
-					</div>
-
-					<div className={style.Box}>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed imperdiet dui. Integer vel turpis id nulla dictum eleifend quis vel lacus. Etiam non mauris sed ex rhoncus sagittis ac ac lacus. Quisque pharetra sem dui, ac egestas quam lacinia vitae. Nullam ut mollis lorem, sit amet aliquam sem. Ut placerat commodo faucibus. In hac habitasse platea dictumst. Ut consectetur tortor id velit vehicula, eget ultrices neque pharetra. Suspendisse blandit feugiat nulla, a ornare lectus accumsan non. Donec at arcu nec lorem condimentum condimentum sed at est. Sed eu interdum felis.
-					</div>
+					{this.renderContent()}
 				</div>
 			</div>
 		);
