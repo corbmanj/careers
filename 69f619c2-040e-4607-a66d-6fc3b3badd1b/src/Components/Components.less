@@ -17,7 +17,7 @@
 	margin: 0 0 30px;
 
 	i {
-		font-size: 1.8rem;
+		font-size: 1em;
 		margin: 0 10px;
 	}
 }
@@ -28,8 +28,19 @@
 	margin: 0 20px;
 	line-height: 20px;
 
-	ul {
-		list-style-type: none;
+	table {
+		border-spacing: 0;
+		width: 100%;
+	}
+	thead {
+		font-weight: @mediumBold;
+	}
+	tr:nth-child(even) {
+		background: @greyLight;
+	}
+	td {
+		padding: 0 10px;
+		line-height: 1.8em;
 	}
 }
 
