@@ -5,7 +5,7 @@ import * as style from './Containers.less'
 import Breadcrumb from '../Components/Breadcrumb'
 import MemberList from '../Components/MemberList'
 import MemberInfo from '../Components/MemberInfo'
-import { callApi } from '../lib'
+import { getTeams, getMembers, getFiles } from '../lib'
 
 class Teams extends Component {
 	constructor(props) {
@@ -16,48 +16,35 @@ class Teams extends Component {
 	}
 
 	componentDidMount () {
-		callApi('5c9d99d133000056003f2385')
-			.then(teamsResponse => {
-				callApi(`5ca00c403300006e00a87dba?team=${teamsResponse.data[0].id}`)
-					.then(membersResponse => {
-						callApi(`5c9d99b13300005b003f2382?employee=${membersResponse.data[0].id}`)
-							.then(filesResponse => {
-								this.setState({
-									teams: teamsResponse.data,
-									selectedTeamId: teamsResponse.data[0].id,
-									members: membersResponse.data,
-									selectedMemberId: membersResponse.data[0].id,
-									files: filesResponse.data,
-									loading: false
-								})
-							})
-					})
+		getTeams().then(teams => {
+			this.updateSelectedTeam(teams.data[0].id)
+			this.setState({
+				teams: teams.data,
+				selectedTeamId: teams.data[0].id	
 			})
+		})
 	}
 
 	updateSelectedTeam = (teamId) => {
-		callApi(`5ca00c403300006e00a87dba?team=${teamId}`)
-			.then(membersResponse => {
-				callApi(`5c9d99b13300005b003f2382?employee=${membersResponse.data[0].id}`)
-						.then(filesResponse => {
-							this.setState({
-								selectedTeamId: teamId,
-								members: membersResponse.data,
-								selectedMemberId: membersResponse.data[0].id,
-								files: filesResponse.data
-							})
-						})
+		getMembers(teamId).then(members => {
+			this.setState({
+				selectedTeamId: teamId,
+				members: members.data,
 			})
+			this.updateSelectedMember(members.data[0].id)
+		})
 	}
 
 	updateSelectedMember = (id) => {
-		callApi(`5c9d99b13300005b003f2382?employee=${id}`)
-			.then(filesResponse => {
-				this.setState({
-					files: filesResponse.data,
-					selectedMemberId: id
-				})
+		getFiles(id).then(files => {
+			this.setState({
+				files: files.data,
+				selectedMemberId: id,
+				// we may need a better solution than putting the loading: false in the last API call
+				// react does not guaruntee the order it calls nestsed setStates
+				loading: false
 			})
+		})
 	}
 
 	render() {
